@@ -20,10 +20,72 @@ public class Summary {
             }
             count.incrementAndGet();
         }
+        int totalCount = 0;
+
+        Map<String, Integer> prefixCountMap = new TreeMap<String, Integer>();
+        String previousPackage = null;
+
+
+        System.out.println(" ============== DETAILS ==============");
         for (Map.Entry<String, AtomicInteger> entry : packageToCount.entrySet()) {
-            System.out.printf("% 8d %s%n", entry.getValue().get(), entry.getKey());
+            String packageName = entry.getKey();
+            int value = entry.getValue().get();
+            totalCount += value;
+
+            System.out.printf("% 8d %s%n", value, packageName);
+
         }
+
+        System.out.append("\n\n");
+        System.out.println(" ============== TOTAL ==============");
+        System.out.println("Total: " + totalCount);
     }
+
+   /* *//**
+     * @param p1
+     * @param p2
+     * @return  a Pair, with int as first indicating which parameter is
+     *//*
+    private static String getPrefix(String p1, String p2) {
+        // Find shortest prefix
+
+        String [] ps1 = p1.split("\\.");
+        String [] ps2 = p2.split("\\.");
+
+        if (ps1.length < ps2.length) {
+
+            return calcPrefix(ps1, ps2);
+
+        } else {
+
+            return calcPrefix(ps2, ps1);
+
+        }
+    }*/
+
+    /*private static String calcPrefix(String[] shorterOne, String[] longerOne){
+
+        String prefix = "";
+
+        if (shorterOne.length <= 1){
+            return prefix;
+        }
+
+        for (int i = 0; i< shorterOne.length; i++){
+            if (!shorterOne[i].equals(longerOne[i])) {
+                return prefix;
+            } else {
+
+                if (i > 0 ){
+                    prefix += ".";
+                }
+                    prefix += shorterOne[i];
+
+            }
+        }
+
+        return prefix;
+    }*/
 
     private static String typeNameToPackageName(String typeName) {
         if (typeName.startsWith("[")) typeName = typeName.substring(1); // arrays
